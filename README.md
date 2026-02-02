@@ -1,109 +1,111 @@
 # 🎨 Fashion Trend Analytics with PySpark
 
-A creative PySpark project that analyzes fashion trends, predicts hot items, and provides actionable insights for the fashion industry
+A PySpark project for fashion trend analysis with two pipelines:
 
-## 🌟 What This Does
+1. **Synthetic Trend Generator + Analytics Dashboard**  
+   Generates a realistic two-year dataset (10,000+ records) and produces trend insights and dashboards.
 
-This project uses PySpark's big data processing power to:
--  Analyze 10,000+ fashion items across categories, styles, and colors
--  Identify trending styles and colors by season
--  Discover regional fashion preferences
--  Analyze price points and revenue patterns
--  Track year-over-year growth
--  Generate actionable recommendations
--  Create beautiful visualizations
+2. **Zara-Style Catalog Analytics (Scraping-Ready Template)**  
+   Builds a Zara-like product catalog dataset and analyzes category, color, style, price, stock, and regional patterns.
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
-- Python 3.7+
+## 🌟 Capabilities
+
+### Synthetic Pipeline
+- Generate 10,000+ fashion records across categories, styles, colors, seasons, and regions
+- Identify top categories by revenue and units sold
+- Rank top seasonal colors (Spark window functions)
+- Analyze style popularity and social engagement
+- Detect regional preferences (top style per region)
+- Segment performance by price range
+- Export datasets and insights for downstream work
+- Create dashboards and detailed analysis charts
+
+### Zara-Style Pipeline
+- Build a product catalog dataset with Zara-like attributes (category, style, color, price, stock status, bestseller flag)
+- Analyze:
+  - Top categories by revenue, units, average price, and SKU count
+  - Top colors per season (ranked)
+  - Style popularity vs engagement and price
+  - Price band performance
+  - Bestseller patterns
+  - Stock status distribution
+  - Regional performance
+- Export results and generate a dedicated Zara dashboard and detailed figures
+
+---
+
+## 📦 Requirements
+
+### System
+- Python 3.8+
 - Java 8 or 11 (required for PySpark)
 
-### Installation
+### Python Packages
+```bash
+pip install pyspark pandas matplotlib seaborn requests beautifulsoup4
+```
 
-1. **Install Java** (if you don't have it):
-   ```bash
-   # On Ubuntu/Debian
-   sudo apt-get install openjdk-11-jdk
-   
-   # On Mac
-   brew install openjdk@11
-   
-   # On Windows - download from Oracle or use Chocolatey
-   choco install openjdk11
-   ```
+> Note: Charts use a serif font stack that includes “Sabon”. If unavailable, Matplotlib falls back to Georgia / Times New Roman.
 
-2. **Install Python packages**:
-   ```bash
-   pip install pyspark pandas matplotlib seaborn
-   ```
+---
 
-### Running the Project
+## 🚀 Running
 
-1. **Run the main analytics**:
-   ```bash
-   python fashion_trend_analyzer.py
-   ```
-   
-   This will:
-   - Generate fashion trend data
-   - Run comprehensive analytics
-   - Export insights to JSON
-   - Save full dataset as CSV
-   
-2. **Create visualizations**:
-   ```bash
-   python fashion_visualizer.py
-   ```
-   
-   This generates beautiful charts and dashboards!
+### 1) Synthetic Trend Generator + Analytics Dashboard
 
-## 📁 Output Files
+```bash
+python fashion_trend_analyzer.py
+```
 
-After running, we'll get:
-- `fashion_insights.json` - Key findings in JSON format
-- `fashion_data.csv` - Full dataset (10,000 records)
-- `fashion_dashboard.png` - Main dashboard with 6 visualizations
-- `fashion_detailed_analysis.png` - Detailed trend analysis
+**Outputs**
+- `fashion_data.csv` — full synthetic dataset
+- `fashion_insights.json` — curated findings
+- `fashion_dashboard.png` — 6-panel dashboard
+- `fashion_detailed_analysis.png` — additional figures (monthly trend, heatmap, scatter, top combos)
 
-## 🎯 What we Discover
+---
 
-### 1. Category Performance
-See which fashion categories generate the most revenue:
-- Dresses, Tops, Pants, Shoes, Accessories, etc.
-- Average prices per category
-- Total units sold
+### 2) Zara-Style Catalog Analytics
 
-### 2. Color Trends
-Discover the hottest colors for each season:
-- Spring: Bright and pastels
-- Summer: Light and vibrant
-- Fall: Earth tones
-- Winter: Dark and rich
+```bash
+python zara_fashion_analyzer.py
+```
 
-### 3. Style Analysis
-Identify trending styles:
-- Casual, Streetwear, Minimalist
-- Vintage, Bohemian, Formal
-- Social media engagement metrics
+**Notes on data collection**
+- The included function produces a realistic Zara-style dataset by default.
+- Live scraping typically requires additional engineering (headers, rate limiting, anti-bot handling, and site-specific parsing). The script is structured to support this extension without changing the analytics steps.
 
-### 4. Regional Preferences
-See what styles are popular in different regions:
-- North America
-- Europe
-- Asia
-- South America
-- Australia
+**Outputs**
+- `zara_products.csv` — product catalog dataset
+- `zara_insights.json` — curated findings (categories, seasonal colors, styles, bestsellers)
+- `zara_dashboard.png` — Zara analytics dashboard
+- `zara_detailed_analysis.png` — detailed figures (heatmap, scatter, stock status, top combos)
 
-### 5. Price Point Analysis
-Understand which price ranges perform best:
-- Budget (<$50)
-- Mid-Range ($50-150)
-- Premium ($150-300)
-- Luxury (>$300)
+---
 
-### 6. Seasonal Insights
-Get recommendations on what to stock for each season
+## 🧠 Key Metrics Produced
+
+- Revenue and units by category, season, and region
+- Top-N ranking (colors by season, style by region) using Spark window functions
+- Engagement signals (average social engagement per style)
+- Price segmentation performance (budget → luxury)
+- Cross-dimension patterns (category × color combinations)
+
+---
+
+## 🛠️ Technical Notes
+
+- Spark DataFrame caching is used for performance
+- Aggregations: `sum`, `avg`, `count`
+- Window functions: `row_number()` over partitions
+- Plotting is performed via Pandas + Matplotlib/Seaborn
+
+All artifacts are written to the working directory (CSV, JSON, PNG).
+
+---
+
 
 ##  Sample Insights
 
@@ -139,3 +141,4 @@ The project creates:
 4. **Scatter plots** - Price vs popularity
 5. **Line graphs** - Monthly trends
 6. **Horizontal bars** - Regional comparisons
+
