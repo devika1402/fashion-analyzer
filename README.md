@@ -82,5 +82,3 @@ PySpark features used:
 - DataFrame caching for performance across multiple aggregation steps
 
 Visualizations are produced via Pandas and Matplotlib/Seaborn, exported as PNG. JSON outputs are structured for direct downstream use.
-
-Charts use a serif font stack (Sabon, falling back to Georgia and Times New Roman) with a light background style.
